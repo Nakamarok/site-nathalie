@@ -1,0 +1,817 @@
+/* ============================================
+   VARIABLES CSS - Palette Violet & Cerisier
+   ============================================ */
+:root {
+    --color-bg-dark: #2E1A47;
+    --color-bg-medium: #3D245C;
+    --color-bg-light: #4A3B69;
+    --color-accent: #FF6F91;
+    --color-accent-light: #FFB7C5;
+    --color-text-primary: #F3E5F5;
+    --color-text-secondary: #E0B0FF;
+    --color-border: rgba(255, 111, 145, 0.3);
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-glow: 0 0 20px rgba(255, 111, 145, 0.3);
+    --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, var(--color-bg-dark) 0%, var(--color-bg-medium) 100%);
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+}
+
+/* ============================================
+   HEADER HERO
+   ============================================ */
+.hero-header {
+    position: relative;
+    text-align: center;
+    padding: 100px 20px 80px;
+    background: linear-gradient(to bottom, var(--color-bg-dark), var(--color-bg-medium));
+    overflow: hidden;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 111, 145, 0.1), transparent 70%);
+    pointer-events: none;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.header-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+    border: 3px solid var(--color-accent);
+    box-shadow: var(--shadow-glow);
+    animation: pulse-glow 3s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 111, 145, 0.3); }
+    50% { box-shadow: 0 0 35px rgba(255, 111, 145, 0.6); }
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    color: var(--color-accent);
+    letter-spacing: 4px;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tagline {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* ============================================
+   NAVIGATION MODERNE
+   ============================================ */
+.modern-nav {
+    background: rgba(26, 15, 41, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.modern-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.modern-nav ul li a {
+    display: block;
+    padding: 15px 22px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.modern-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: var(--transition-smooth);
+    transform: translateX(-50%);
+}
+
+.modern-nav ul li a:hover {
+    color: white;
+}
+
+.modern-nav ul li a:hover::after {
+    width: 80%;
+}
+
+/* ============================================
+   GLASSMORPHISM EFFECT
+   ============================================ */
+.glass-effect {
+    background: rgba(74, 59, 105, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 111, 145, 0.2);
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 50px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 15px;
+    margin-bottom: 35px;
+    font-weight: 400;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+.lead-text {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   SERVICES GRID MODERNE
+   ============================================ */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background: linear-gradient(145deg, rgba(82, 66, 117, 0.8), rgba(74, 59, 105, 0.8));
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    padding: 35px;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 111, 145, 0.2);
+    border-color: var(--color-accent);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 111, 145, 0.5));
+}
+
+.service-card h3 {
+    font-family: var(--font-heading);
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 12px;
+}
+
+.service-list {
+    list-style: none;
+}
+
+.service-list li {
+    margin-bottom: 18px;
+    padding-left: 28px;
+    position: relative;
+}
+
+.service-list li::before {
+    content: '✿';
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.service-list strong {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   FORMULAIRE MODERNE
+   ============================================ */
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: rgba(61, 36, 92, 0.6);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 15px rgba(255, 111, 145, 0.2);
+    background: rgba(61, 36, 92, 0.8);
+}
+
+.btn-modern {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+    color: var(--color-bg-dark);
+    padding: 16px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-modern:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 111, 145, 0.4);
+}
+
+/* ============================================
+   GALERIE
+   ============================================ */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: var(--transition-smooth);
+    border: 2px solid transparent;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.modern-footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(26, 15, 41, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-border);
+    margin-top: 60px;
+}
+
+.modern-footer p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    .tagline { font-size: 1.1rem; }
+    .container { padding: 30px 20px; margin: 30px 15px; }
+    .modern-nav ul { flex-direction: column; text-align: center; }
+    .modern-nav ul li a { padding: 12px; }
+    .services-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   VARIABLES CSS - Thèmes Sombre & Clair
+   ============================================ */
+:root {
+    /* Thème SOMBRE (défaut) */
+    --bg-dark: #2E1A47;
+    --bg-medium: #3D245C;
+    --bg-light: #4A3B69;
+    --accent: #FF6F91;
+    --accent-light: #FFB7C5;
+    --text-primary: #F3E5F5;
+    --text-secondary: #E0B0FF;
+    --border: rgba(255, 111, 145, 0.3);
+    --card-bg: rgba(74, 59, 105, 0.6);
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Thème CLAIR */
+body.light-mode {
+    --bg-dark: #F8F4FC;
+    --bg-medium: #EDE6F5;
+    --bg-light: #E0D4F0;
+    --accent: #C44569;
+    --accent-light: #E8A5B8;
+    --text-primary: #2D1B4E;
+    --text-secondary: #5D4A7A;
+    --border: rgba(196, 69, 105, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --shadow: 0 10px 40px rgba(45, 27, 78, 0.15);
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.hero-header {
+    position: relative;
+    text-align: center;
+    padding: 100px 20px 80px;
+    background: linear-gradient(to bottom, var(--bg-dark), var(--bg-medium));
+    overflow: hidden;
+    transition: background 0.5s ease;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 111, 145, 0.1), transparent 70%);
+    pointer-events: none;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+}
+
+.header-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 20px rgba(255, 111, 145, 0.3);
+    animation: pulse-glow 3s infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 111, 145, 0.3); }
+    50% { box-shadow: 0 0 35px rgba(255, 111, 145, 0.6); }
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: 4px;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.modern-nav {
+    background: rgba(26, 15, 41, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.5s ease;
+}
+
+body.light-mode .modern-nav {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.modern-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    gap: 5px;
+}
+
+.modern-nav ul li a {
+    display: block;
+    padding: 15px 22px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.modern-nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.modern-nav ul li a:hover {
+    color: var(--accent);
+}
+
+.modern-nav ul li a:hover::after {
+    width: 80%;
+}
+
+/* Bouton de thème */
+.theme-switch {
+    margin-left: 10px;
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#theme-toggle:hover {
+    background: var(--accent);
+    transform: rotate(15deg);
+}
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+.glass-effect {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 50px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 15px;
+    margin-bottom: 35px;
+    font-weight: 400;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
+
+.lead-text {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   SERVICES
+   ============================================ */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background: linear-gradient(145deg, rgba(82, 66, 117, 0.8), rgba(74, 59, 105, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 35px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+body.light-mode .service-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(236, 228, 247, 0.9));
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 111, 145, 0.2);
+    border-color: var(--accent);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 111, 145, 0.5));
+}
+
+.service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.service-list {
+    list-style: none;
+}
+
+.service-list li {
+    margin-bottom: 18px;
+    padding-left: 28px;
+    position: relative;
+}
+
+.service-list li::before {
+    content: '✿';
+    color: var(--accent);
+    font-size: 1.1rem;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.service-list strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   TÉMOIGNAGES (NOUVEAU)
+   ============================================ */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testimonial-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 35px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+body.light-mode .testimonial-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 230, 250, 0.95));
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent);
+}
+
+.quote-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    color: var(--accent);
+    opacity: 0.3;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    line-height: 1;
+}
+
+.testimonial-text {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: 25px;
+    padding-top: 20px;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.author-name {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+.author-location {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   GALERIE
+   ============================================ */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(255, 111, 145, 0.3);
+}
+
+/* ============================================
+   FORMULAIRE
+   ============================================ */
+.form-group {
+    margin-bottom: 25px;
+}

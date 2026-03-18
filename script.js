@@ -32,3 +32,42 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(newTheme);
     });
 });
+
+
+// Gestion du menu burger mobile
+document.addEventListener('DOMContentLoaded', () => {
+    const burgerMenu = document.querySelector('.burger-menu');
+    const navUl = document.querySelector('.modern-nav ul');
+    
+    // Ouvrir/fermer le menu
+    burgerMenu.addEventListener('click', () => {
+        burgerMenu.classList.toggle('active');
+        navUl.classList.toggle('active');
+        
+        // Empêcher le scroll quand le menu est ouvert
+        if (navUl.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Fermer le menu quand on clique sur un lien
+    const navLinks = document.querySelectorAll('.modern-nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            burgerMenu.classList.remove('active');
+            navUl.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Fermer le menu si on clique en dehors
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.modern-nav')) {
+            burgerMenu.classList.remove('active');
+            navUl.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+});

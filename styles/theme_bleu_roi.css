@@ -1,47 +1,45 @@
 /* ============================================
-   VARIABLES CSS - Thème Guérison (Vert + Bleu Roi)
+   VARIABLES CSS - Thème Bleu Roi + Vert Background
    ============================================ */
 :root {
     /* Thème SOMBRE (défaut) */
-    --bg-dark: #0F172A;           /* Bleu nuit très sombre */
-    --bg-medium: #1E293B;         /* Bleu ardoise */
-    --bg-light: #334155;          /* Bleu gris */
-    
-    /* Accents GUÉRISON (VERT) */
-    --healing-green: #2D6A4F;     /* Vert forêt profond */
-    --healing-green-light: #52B788; /* Vert menthe clair */
-    --healing-green-glow: #40916C;  /* Vert apaisant */
-    
-    /* Accents BLEU ROI (conservés) */
-    --accent: #2563EB;            /* Bleu roi vibrant */
-    --accent-light: #60A5FA;      /* Bleu ciel lumineux */
-    --accent-glow: #3B82F6;       /* Bleu pour effets de lueur */
-    
-    --text-primary: #F8FAFC;      /* Blanc cassé bleuté */
-    --text-secondary: #94A3B8;    /* Gris bleuté */
-    --border: rgba(45, 106, 79, 0.3); /* Bordure verte */
+    --bg-dark: #0F172A;
+    --bg-medium: #1E293B;
+    --bg-light: #334155;
+    --accent: #2563EB;              /* Bleu roi - ACCENTS PRINCIPAUX */
+    --accent-light: #60A5FA;        /* Bleu ciel - ACCENTS */
+    --accent-glow: #3B82F6;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --border: rgba(37, 99, 235, 0.3);
     --card-bg: rgba(51, 65, 85, 0.6);
     --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 20px rgba(45, 106, 79, 0.4); /* Lueur verte */
+    --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.4);
+    
+    /* Vert Guérison - BACKGROUND UNIQUEMENT */
+    --green-healing: #10B981;       /* Vert principal background */
+    --green-sage: #34D399;          /* Vert doux background */
+    --green-deep: #064E3B;          /* Vert profond background */
 }
 
-/* Thème CLAIR */
 body.light-mode {
     --bg-dark: #F0F4F8;
     --bg-medium: #E2E8F0;
     --bg-light: #CBD5E1;
-    --healing-green: #1B4332;
-    --healing-green-light: #74C69D;
-    --healing-green-glow: #40916C;
     --accent: #1D4ED8;
     --accent-light: #3B82F6;
     --accent-glow: #60A5FA;
     --text-primary: #1E293B;
     --text-secondary: #475569;
-    --border: rgba(27, 67, 50, 0.3);
+    --border: rgba(29, 78, 216, 0.3);
     --card-bg: rgba(255, 255, 255, 0.9);
-    --shadow: 0 10px 40px rgba(27, 67, 50, 0.15);
-    --shadow-glow: 0 0 20px rgba(27, 67, 50, 0.2);
+    --shadow: 0 10px 40px rgba(29, 78, 216, 0.15);
+    --shadow-glow: 0 0 20px rgba(29, 78, 216, 0.2);
+    
+    /* Vert Guérison - BACKGROUND UNIQUEMENT */
+    --green-healing: #D1FAE5;       /* Vert très doux pour mode clair */
+    --green-sage: #A7F3D0;
+    --green-deep: #6EE7B7;
 }
 
 /* ============================================
@@ -59,12 +57,8 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* Dégradé avec vert sur les côtés */
-    background: linear-gradient(135deg, 
-        var(--healing-green) 0%, 
-        var(--bg-dark) 30%, 
-        var(--bg-medium) 70%, 
-        var(--healing-green) 100%);
+    /* Dégradé BLEU + VERT en background */
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--green-deep) 50%, var(--bg-medium) 100%);
     color: var(--text-primary);
     line-height: 1.7;
     min-height: 100vh;
@@ -78,11 +72,8 @@ body {
     position: relative;
     text-align: center;
     padding: 100px 20px 80px;
-    /* Dégradé vertical avec touches de vert */
-    background: linear-gradient(to bottom, 
-        var(--bg-dark), 
-        var(--bg-medium),
-        rgba(45, 106, 79, 0.3));
+    /* Dégradé BLEU + VERT en background */
+    background: linear-gradient(to bottom, var(--bg-dark), var(--green-deep), var(--bg-medium));
     overflow: hidden;
     transition: background 0.5s ease;
 }
@@ -99,10 +90,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    /* Overlay avec lueur verte */
-    background: radial-gradient(circle at 50% 50%, 
-        rgba(45, 106, 79, 0.2), 
-        transparent 70%);
+    /* Overlay VERT subtil */
+    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1), transparent 70%);
     pointer-events: none;
 }
 
@@ -117,8 +106,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 25px;
-    /* Bordure verte au lieu de bleue */
-    border: 3px solid var(--healing-green-light);
+    border: 3px solid var(--accent);
     box-shadow: var(--shadow-glow);
     animation: pulse-glow 3s infinite;
 }
@@ -131,15 +119,14 @@ body {
 }
 
 @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(45, 106, 79, 0.4); }
-    50% { box-shadow: 0 0 35px rgba(45, 106, 79, 0.7); }
+    0%, 100% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); }
+    50% { box-shadow: 0 0 35px rgba(37, 99, 235, 0.7); }
 }
 
 h1 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    /* Titre en vert guérison */
-    color: var(--healing-green-light);
+    color: var(--accent-light);
     letter-spacing: 4px;
     font-size: 3rem;
     margin-bottom: 15px;
@@ -177,8 +164,7 @@ h1 {
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    /* Bordure inférieure verte */
-    border-bottom: 2px solid var(--healing-green);
+    border-bottom: 1px solid var(--border);
     transition: background 0.5s ease;
 }
 
@@ -215,14 +201,13 @@ body.light-mode .modern-nav {
     left: 50%;
     width: 0;
     height: 2px;
-    /* Soulignement vert */
-    background: var(--healing-green-light);
+    background: var(--accent);
     transition: width 0.4s ease;
     transform: translateX(-50%);
 }
 
 .modern-nav ul li a:hover {
-    color: var(--healing-green-light);
+    color: var(--accent-light);
 }
 
 .modern-nav ul li a:hover::after {
@@ -247,7 +232,7 @@ body.light-mode .modern-nav {
     display: block;
     width: 100%;
     height: 3px;
-    background: var(--healing-green-light);
+    background: var(--accent);
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -271,7 +256,7 @@ body.light-mode .modern-nav {
 
 #theme-toggle {
     background: transparent;
-    border: 2px solid var(--healing-green-light);
+    border: 2px solid var(--accent);
     border-radius: 50%;
     width: 45px;
     height: 45px;
@@ -284,7 +269,7 @@ body.light-mode .modern-nav {
 }
 
 #theme-toggle:hover {
-    background: var(--healing-green);
+    background: var(--accent);
     transform: rotate(15deg);
     color: white;
 }
@@ -296,7 +281,7 @@ body.light-mode .modern-nav {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--healing-green);
+    border: 1px solid var(--border);
     border-radius: 20px;
     box-shadow: var(--shadow);
     transition: background 0.5s ease, border-color 0.5s ease;
@@ -329,9 +314,8 @@ body.light-mode .modern-nav {
 
 h2 {
     font-family: 'Cormorant Garamond', serif;
-    /* Titres de section en vert */
-    color: var(--healing-green-light);
-    border-bottom: 2px solid var(--healing-green);
+    color: var(--accent-light);
+    border-bottom: 2px solid var(--border);
     padding-bottom: 15px;
     margin-bottom: 35px;
     font-weight: 400;
@@ -375,10 +359,8 @@ h2 {
 }
 
 .service-card {
-    background: linear-gradient(145deg, 
-        rgba(45, 106, 79, 0.9), 
-        rgba(30, 41, 59, 0.9));
-    border: 1px solid var(--healing-green);
+    background: linear-gradient(145deg, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.9));
+    border: 1px solid var(--border);
     border-radius: 18px;
     padding: 35px;
     transition: all 0.4s ease;
@@ -387,9 +369,7 @@ h2 {
 }
 
 body.light-mode .service-card {
-    background: linear-gradient(145deg, 
-        rgba(255, 255, 255, 0.95), 
-        rgba(226, 232, 240, 0.95));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.95));
 }
 
 .service-card::before {
@@ -399,10 +379,7 @@ body.light-mode .service-card {
     left: 0;
     right: 0;
     height: 4px;
-    /* Barre supérieure verte */
-    background: linear-gradient(90deg, 
-        var(--healing-green), 
-        var(--healing-green-light));
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -413,14 +390,14 @@ body.light-mode .service-card {
 
 .hover-lift:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(45, 106, 79, 0.25);
-    border-color: var(--healing-green-light);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.25);
+    border-color: var(--accent-light);
 }
 
 .card-icon {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px rgba(45, 106, 79, 0.5));
+    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.5));
 }
 
 .service-card h3 {
@@ -428,7 +405,7 @@ body.light-mode .service-card {
     color: var(--text-secondary);
     margin-bottom: 20px;
     font-size: 1.5rem;
-    border-bottom: 1px solid var(--healing-green);
+    border-bottom: 1px solid var(--border);
     padding-bottom: 12px;
 }
 
@@ -443,9 +420,8 @@ body.light-mode .service-card {
 }
 
 .service-list li::before {
-    content: '✿';
-    /* Puces en vert guérison */
-    color: var(--healing-green-light);
+    content: '✦';
+    color: var(--accent);
     font-size: 1.1rem;
     position: absolute;
     left: 0;
@@ -476,10 +452,8 @@ body.light-mode .service-card {
 }
 
 .testimonial-card {
-    background: linear-gradient(145deg, 
-        rgba(45, 106, 79, 0.1), 
-        rgba(45, 106, 79, 0.05));
-    border: 1px solid var(--healing-green);
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.05));
+    border: 1px solid var(--border);
     border-radius: 18px;
     padding: 35px;
     position: relative;
@@ -487,21 +461,19 @@ body.light-mode .service-card {
 }
 
 body.light-mode .testimonial-card {
-    background: linear-gradient(145deg, 
-        rgba(255, 255, 255, 0.95), 
-        rgba(226, 232, 240, 0.95));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.95));
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(45, 106, 79, 0.2);
-    border-color: var(--healing-green-light);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
+    border-color: var(--accent-light);
 }
 
 .quote-icon {
     font-family: 'Cormorant Garamond', serif;
     font-size: 4rem;
-    color: var(--healing-green);
+    color: var(--accent);
     opacity: 0.2;
     position: absolute;
     top: 15px;
@@ -523,12 +495,12 @@ body.light-mode .testimonial-card {
     flex-direction: column;
     gap: 5px;
     padding-top: 20px;
-    border-top: 1px solid var(--healing-green);
+    border-top: 1px solid var(--border);
 }
 
 .author-name {
     font-weight: 600;
-    color: var(--healing-green-light);
+    color: var(--accent);
     font-size: 1.1rem;
 }
 
@@ -570,7 +542,7 @@ body.light-mode .testimonial-card {
 
 .gallery-grid img:hover {
     transform: scale(1.05);
-    border-color: var(--healing-green-light);
+    border-color: var(--accent-light);
     box-shadow: var(--shadow-glow);
 }
 
@@ -611,7 +583,7 @@ body.light-mode .testimonial-card {
     max-width: 90%;
     max-height: 90%;
     border-radius: 10px;
-    box-shadow: 0 0 40px rgba(45, 106, 79, 0.5);
+    box-shadow: 0 0 40px rgba(37, 99, 235, 0.5);
     animation: zoomIn 0.3s ease;
 }
 
@@ -647,7 +619,7 @@ body.light-mode .testimonial-card {
 }
 
 .close-btn:hover {
-    color: var(--healing-green-light);
+    color: var(--accent-light);
 }
 
 /* ============================================
@@ -674,7 +646,7 @@ input, textarea {
     width: 100%;
     padding: 15px 18px;
     border-radius: 10px;
-    border: 1px solid var(--healing-green);
+    border: 1px solid var(--border);
     background: rgba(30, 41, 59, 0.6);
     color: var(--text-primary);
     font-family: 'Montserrat', sans-serif;
@@ -689,8 +661,8 @@ body.light-mode textarea {
 
 input:focus, textarea:focus {
     outline: none;
-    border-color: var(--healing-green-light);
-    box-shadow: 0 0 15px rgba(45, 106, 79, 0.3);
+    border-color: var(--accent-light);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
     background: rgba(30, 41, 59, 0.8);
 }
 
@@ -700,9 +672,7 @@ body.light-mode textarea:focus {
 }
 
 .btn-modern {
-    background: linear-gradient(135deg, 
-        var(--healing-green), 
-        var(--healing-green-light));
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
     color: white;
     padding: 16px 40px;
     border: none;
@@ -724,7 +694,7 @@ body.light-mode textarea:focus {
 
 .btn-modern:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(45, 106, 79, 0.4);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
 }
 
 /* ============================================
@@ -735,7 +705,7 @@ body.light-mode textarea:focus {
     padding: 40px 20px;
     background: rgba(15, 23, 42, 0.95);
     backdrop-filter: blur(10px);
-    border-top: 2px solid var(--healing-green);
+    border-top: 1px solid var(--border);
     margin-top: 60px;
     transition: background 0.5s ease;
 }
@@ -779,7 +749,7 @@ body.light-mode .modern-footer {
         backdrop-filter: blur(15px);
         padding: 20px 0;
         gap: 0;
-        border-top: 2px solid var(--healing-green);
+        border-top: 1px solid var(--border);
         max-height: 70vh;
         overflow-y: auto;
     }
@@ -807,7 +777,7 @@ body.light-mode .modern-footer {
     .modern-nav ul li {
         width: 100%;
         text-align: center;
-        border-bottom: 1px solid var(--healing-green);
+        border-bottom: 1px solid var(--border);
     }
 
     .modern-nav ul li a {
@@ -864,6 +834,6 @@ body.light-mode .modern-footer {
 }
 
 *:focus-visible {
-    outline: 2px solid var(--healing-green-light);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
 }

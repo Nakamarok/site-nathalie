@@ -71,3 +71,71 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+// Charger la galerie depuis JSON
+async function loadGallery() {
+    try {
+        const response = await fetch('gallery.json');
+        const data = await response.json();
+        const grid = document.getElementById('gallery-grid');
+        
+        // Afficher seulement les 10 dernières photos
+        const last10 = data.photos.slice(-10);
+        
+        last10.forEach(filename => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <img src="assets/${filename}" alt="${filename}" loading="lazy" class="gallery-img">
+            `;
+            grid.appendChild(item);
+        });
+        
+        // Ajouter la lightbox
+        setupLightbox();
+    } catch (error) {
+        console.error('Erreur chargement galerie:', error);
+    }
+}
+
+function setupLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+    });
+    
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// Initialiser au chargement
+document.addEventListener('DOMContentLoaded', loadGallery);

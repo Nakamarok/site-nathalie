@@ -88,7 +88,7 @@ async function loadGallery() {
             item.className = 'gallery-item';
             item.innerHTML = `
                 <img src="assets/${filename}" alt="${filename}" loading="lazy" class="gallery-img">
-                <href="assets/${filename}" download class="download-btn" aria-label="Télécharger ${filename}">⬇️</a>
+                    <a href="assets/${filename}" download class="download-btn" aria-label="Télécharger ${filename}">⬇️</a>
             `;
             grid.appendChild(item);
         });

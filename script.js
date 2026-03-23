@@ -92,7 +92,7 @@ async function loadGallery() {
                     <div class="overlay" aria-hidden="true">
                         <span class="overlay-text">Voir</span>
                     </div>
-                    <a href="assets/${filename}" download class="download-btn" aria-label="Télécharger ${filename}">⬇️</a>
+                    <div class="caption" aria-hidden="true">${filename}</div>
             `;
             grid.appendChild(item);
         });

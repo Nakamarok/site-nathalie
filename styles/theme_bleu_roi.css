@@ -945,14 +945,22 @@ body.light-mode #back-to-top:hover {
 /* Couleurs spécifiques */
 .social-btn-contact.youtube:hover {
     background: #FF0000;
+    border-color: #FF0000;
 }
 
 .social-btn-contact.tiktok:hover {
     background: #000000;
+    border-color: #000000;
+}
+
+.social-btn.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border-color: #bc1888;
 }
 
 .social-btn-contact.facebook:hover {
     background: #1877F2;
+    border-color: #1877F2;
 }
 
 @media (max-width: 768px) {

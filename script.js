@@ -1,16 +1,14 @@
-// Gestion du mode sombre/clair
+// ============================================
+// INITIALISATION AU CHARGEMENT DE LA PAGE
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
+    // Gestion du mode sombre/clair
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    const header = document.querySelector('.hero-header');
-    const nav = document.querySelector('.modern-nav');
-    const footer = document.querySelector('.modern-footer');
     
-    // Vérifier si une préférence est déjà enregistrée
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
     
-    // Fonction pour appliquer le thème
     function setTheme(theme) {
         if (theme === 'light') {
             body.classList.add('light-mode');
@@ -25,101 +23,142 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Écouter le clic sur le bouton
-    themeToggle.addEventListener('click', () => {
+    themeToggle?.addEventListener('click', () => {
         const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
     });
-});
-
-//Bouton retour en haut
-const backToTopBtn = document.getElementById('back-to-top');
-
-if (backToTopBtn) {
-    // Afficher/Masquer le bouton au scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
-        }
-    });
-
-    // Remonter en haut de page au clic
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-// Gestion du menu burger mobile
-document.addEventListener('DOMContentLoaded', () => {
+    
+    // Gestion du menu burger mobile
     const burgerMenu = document.querySelector('.burger-menu');
     const navUl = document.querySelector('.modern-nav ul');
     
-    // Ouvrir/fermer le menu
-    burgerMenu.addEventListener('click', () => {
+    burgerMenu?.addEventListener('click', () => {
         burgerMenu.classList.toggle('active');
-        navUl.classList.toggle('active');
-        
-        // Empêcher le scroll quand le menu est ouvert
-        if (navUl.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
+        navUl?.classList.toggle('active');
+        document.body.style.overflow = navUl?.classList.contains('active') ? 'hidden' : '';
     });
     
-    // Fermer le menu quand on clique sur un lien
     const navLinks = document.querySelectorAll('.modern-nav ul li a');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             burgerMenu.classList.remove('active');
-            navUl.classList.remove('active');
+            navUl?.classList.remove('active');
             document.body.style.overflow = '';
         });
     });
     
-    // Fermer le menu si on clique en dehors
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.modern-nav')) {
-            burgerMenu.classList.remove('active');
-            navUl.classList.remove('active');
+            burgerMenu?.classList.remove('active');
+            navUl?.classList.remove('active');
             document.body.style.overflow = '';
         }
     });
+    
+    // Charger la galerie
+    loadGallery();
+    
+    // Charger les diplômes
+    loadDiplomas();
+    
+    // Bouton retour en haut
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }, { passive: true });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+    
+    // Formulaire de contact
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            formStatus.textContent = '';
+            
+            try {
+                const formData = {
+                    nom: document.getElementById('nom').value,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('message').value
+                };
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData, EMAILJS_PUBLIC_KEY);
+                formStatus.textContent = '✅ Message envoyé avec succès !';
+                formStatus.style.color = '#10B981';
+                contactForm.reset();
+            } catch (error) {
+                console.error('Erreur d\'envoi:', error);
+                formStatus.textContent = '❌ Erreur lors de l\'envoi.';
+                formStatus.style.color = '#EF4444';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Envoyer';
+            }
+        });
+    }
 });
 
-
-// Charger la galerie depuis JSON
+// ============================================
+// FONCTIONS DE CHARGEMENT
+// ============================================
 async function loadGallery() {
     try {
         const response = await fetch('gallery.json');
         const data = await response.json();
         const grid = document.getElementById('gallery-grid');
-        
-        // Afficher seulement les 10 dernières photos
         const last10 = data.photos.slice(-10);
         
         last10.forEach(filename => {
             const item = document.createElement('div');
             item.className = 'gallery-item';
-
             item.innerHTML = `
                 <img src="assets/${filename}" alt="${filename}" loading="lazy" class="gallery-img">
-                    <div class="overlay" aria-hidden="true">
-                    </div>
+                <div class="overlay" aria-hidden="true"></div>
             `;
             grid.appendChild(item);
         });
         
-        // Ajouter la lightbox
         setupLightbox();
     } catch (error) {
-        console.error('Erreur chargement galerie:', error);
+        console.warn('Galerie non configurée:', error);
+    }
+}
+
+async function loadDiplomas() {
+    try {
+        const response = await fetch('diplomes.json');
+        const data = await response.json();
+        const grid = document.getElementById('diplomes-grid');
+        
+        data.diplomas.forEach((filename, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+                <img src="assets/Diplomes/${filename}" alt="Diplôme ${index + 1}" loading="lazy" class="gallery-img">
+                <div class="overlay" aria-hidden="true">
+                    <span class="overlay-text">📜</span>
+                </div>
+            `;
+            grid.appendChild(item);
+        });
+        
+        setupLightbox();
+    } catch (error) {
+        console.warn('Diplômes non configurés:', error);
     }
 }
 
@@ -138,13 +177,13 @@ function setupLightbox() {
         });
     });
     
-    closeBtn.addEventListener('click', () => {
+    closeBtn?.addEventListener('click', () => {
         lightbox.classList.remove('active');
         lightboxImg.src = '';
         document.body.style.overflow = '';
     });
     
-    lightbox.addEventListener('click', (e) => {
+    lightbox?.addEventListener('click', (e) => {
         if (e.target === lightbox) {
             lightbox.classList.remove('active');
             lightboxImg.src = '';
@@ -153,16 +192,13 @@ function setupLightbox() {
     });
     
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
             lightbox.classList.remove('active');
             lightboxImg.src = '';
             document.body.style.overflow = '';
         }
     });
 }
-
-
-
 
 // ============================================
 // ENVOI DE FORMULAIRE DE CONTACT
@@ -215,43 +251,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
-
-// ============================================
-// CHARGEMENT DES DIPLÔMES
-// ============================================
-async function loadDiplomas() {
-    try {
-        const response = await fetch('diplomes.json');
-        const data = await response.json();
-        const grid = document.getElementById('diplomes-grid');
-        
-        // Afficher tous les diplômes
-        data.diplomas.forEach((filename, index) => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.setAttribute('data-category', 'diplome');
-            
-            item.innerHTML = `
-                <img src="assets/Diplomes/${filename}" alt="Diplôme ${index + 1}" loading="lazy" class="gallery-img">
-                <div class="overlay" aria-hidden="true">
-                    <span class="overlay-text"></span>
-                </div>
-            `;
-            grid.appendChild(item);
-        });
-        
-        // Réutiliser la lightbox existante
-        setupLightbox();
-    } catch (error) {
-        console.warn('Fichier diplômes non configuré:', error);
-        const grid = document.getElementById('diplomes-grid');
-        grid.innerHTML = '<p class="lead-text">Diplômes bientôt disponibles</p>';
-    }
-}
-
-// Initialiser au chargement
-document.addEventListener('DOMContentLoaded', () => {
-    loadGallery();
-    loadDiplomas();
 });

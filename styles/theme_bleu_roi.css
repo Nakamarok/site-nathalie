@@ -905,3 +905,68 @@ body.light-mode #back-to-top:hover {
         font-size: 1.2rem;
     }
 }
+
+/* ============================================
+   BOUTONS RÉSEAUX SOCIAUX - SECTION CONTACT
+   ============================================ */
+/* Boutons dans la section contact */
+.social-links-contact {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.social-btn-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: white;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.social-btn-contact svg {
+    width: 26px;
+    height: 26px;
+}
+
+.social-btn-contact:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+}
+
+/* Couleurs spécifiques */
+.social-btn-contact.youtube:hover {
+    background: #FF0000;
+}
+
+.social-btn-contact.tiktok:hover {
+    background: #000000;
+}
+
+.social-btn-contact.facebook:hover {
+    background: #1877F2;
+}
+
+@media (max-width: 768px) {
+    .social-links-contact {
+        gap: 15px;
+    }
+    
+    .social-btn-contact {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .social-btn-contact svg {
+        width: 22px;
+        height: 22px;
+    }
+}

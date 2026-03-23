@@ -161,8 +161,6 @@ function setupLightbox() {
     });
 }
 
-// Initialiser au chargement
-document.addEventListener('DOMContentLoaded', loadGallery);
 
 
 
@@ -237,7 +235,7 @@ async function loadDiplomas() {
             item.innerHTML = `
                 <img src="assets/Diplomes/${filename}" alt="Diplôme ${index + 1}" loading="lazy" class="gallery-img">
                 <div class="overlay" aria-hidden="true">
-                    <span class="overlay-text">📜</span>
+                    <span class="overlay-text"></span>
                 </div>
             `;
             grid.appendChild(item);

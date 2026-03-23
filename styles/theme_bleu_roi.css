@@ -970,3 +970,79 @@ body.light-mode #back-to-top:hover {
         height: 22px;
     }
 }
+
+/* ============================================
+   DIPLÔMES - STYLES SPÉCIFIQUES
+   ============================================ */
+#diplomes .lead-text {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#diplomes .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#diplomes .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 99, 235, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#diplomes .gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+#diplomes .overlay-text {
+    font-size: 3rem;
+    color: white;
+    transform: scale(0.8);
+    transition: transform 0.4s ease;
+}
+
+#diplomes .gallery-item:hover .overlay-text {
+    transform: scale(1.1);
+}
+
+/* Badge "Diplôme" sur les images */
+#diplomes .gallery-item::after {
+    content: '📜';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Mode clair */
+body.light-mode #diplomes .gallery-item::after {
+    background: var(--accent-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #diplomes .overlay-text {
+        font-size: 2.5rem;
+    }
+    
+    #diplomes .gallery-item::after {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}

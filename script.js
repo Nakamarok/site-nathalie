@@ -235,7 +235,7 @@ async function loadDiplomas() {
             item.setAttribute('data-category', 'diplome');
             
             item.innerHTML = `
-                <img src="assets/${filename}" alt="Diplôme ${index + 1}" loading="lazy" class="gallery-img">
+                <img src="assets/Diplomes/${filename}" alt="Diplôme ${index + 1}" loading="lazy" class="gallery-img">
                 <div class="overlay" aria-hidden="true">
                     <span class="overlay-text">📜</span>
                 </div>

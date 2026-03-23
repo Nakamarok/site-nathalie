@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Bouton retour en haut
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('back-to-top');
+    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
+});
 
 // Gestion du menu burger mobile
 document.addEventListener('DOMContentLoaded', () => {

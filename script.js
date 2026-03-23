@@ -90,9 +90,7 @@ async function loadGallery() {
             item.innerHTML = `
                 <img src="assets/${filename}" alt="${filename}" loading="lazy" class="gallery-img">
                     <div class="overlay" aria-hidden="true">
-                        <span class="view-icon">🔍</span>
                     </div>
-                    <div class="caption" aria-hidden="true">${filename}</div>
             `;
             grid.appendChild(item);
         });

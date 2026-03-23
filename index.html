@@ -203,10 +203,9 @@
         </section>
 
 
-
         <section id="contact" class="container glass-effect">
             <h2>Contact</h2>
-            <form action="#" method="post">
+            <form id="contact-form">
                 <div class="form-group">
                     <label for="nom">Nom</label>
                     <input type="text" id="nom" name="nom" required>
@@ -219,7 +218,8 @@
                     <label for="message">Message</label>
                     <textarea id="message" name="message" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="btn-modern">Envoyer</button>
+                <button type="submit" class="btn-modern" id="submit-btn">Envoyer</button>
+                <p id="form-status" style="margin-top: 15px;"></p>
             </form>
         </section>
 
@@ -232,6 +232,13 @@
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
-<button id="back-to-top" aria-label="Retour en haut" style="display:none;">↑</button>
+<button id="back-to-top" aria-label="Retour en haut" title="Haut de page">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        emailjs.init("TON_PUBLIC_KEY");
+    })();
+</script>
 </body>
 </html>

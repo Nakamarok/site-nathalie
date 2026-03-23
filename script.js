@@ -34,10 +34,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //Bouton retour en haut
-window.addEventListener('scroll', () => {
-    const btn = document.getElementById('back-to-top');
-    btn.style.display = window.scrollY > 300 ? 'block' : 'none';
-});
+const backToTopBtn = document.getElementById('back-to-top');
+
+if (backToTopBtn) {
+    // Afficher/Masquer le bouton au scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    // Remonter en haut de page au clic
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
 // Gestion du menu burger mobile
 document.addEventListener('DOMContentLoaded', () => {
@@ -147,3 +163,58 @@ function setupLightbox() {
 
 // Initialiser au chargement
 document.addEventListener('DOMContentLoaded', loadGallery);
+
+
+
+// ============================================
+// ENVOI DE FORMULAIRE DE CONTACT
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+    
+    // Remplace par tes identifiants EmailJS
+    const EMAILJS_PUBLIC_KEY = 'TON_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID = 'TON_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'TON_TEMPLATE_ID';
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Désactiver le bouton pendant l'envoi
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            formStatus.textContent = '';
+            formStatus.style.color = 'var(--text-secondary)';
+            
+            try {
+                // Récupérer les données du formulaire
+                const formData = {
+                    nom: document.getElementById('nom').value,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Envoyer via EmailJS
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData, EMAILJS_PUBLIC_KEY);
+                
+                // Succès
+                formStatus.textContent = '✅ Message envoyé avec succès !';
+                formStatus.style.color = '#10B981';
+                contactForm.reset();
+                
+            } catch (error) {
+                // Erreur
+                console.error('Erreur d\'envoi:', error);
+                formStatus.textContent = '❌ Erreur lors de l\'envoi. Veuillez réessayer.';
+                formStatus.style.color = '#EF4444';
+            } finally {
+                // Réactiver le bouton
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Envoyer';
+            }
+        });
+    }
+});

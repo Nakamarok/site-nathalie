@@ -218,3 +218,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// ============================================
+// CHARGEMENT DES DIPLÔMES
+// ============================================
+async function loadDiplomas() {
+    try {
+        const response = await fetch('diplomes.json');
+        const data = await response.json();
+        const grid = document.getElementById('diplomes-grid');
+        
+        // Afficher tous les diplômes
+        data.diplomas.forEach((filename, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-category', 'diplome');
+            
+            item.innerHTML = `
+                <img src="assets/${filename}" alt="Diplôme ${index + 1}" loading="lazy" class="gallery-img">
+                <div class="overlay" aria-hidden="true">
+                    <span class="overlay-text">📜</span>
+                </div>
+            `;
+            grid.appendChild(item);
+        });
+        
+        // Réutiliser la lightbox existante
+        setupLightbox();
+    } catch (error) {
+        console.warn('Fichier diplômes non configuré:', error);
+        const grid = document.getElementById('diplomes-grid');
+        grid.innerHTML = '<p class="lead-text">Diplômes bientôt disponibles</p>';
+    }
+}
+
+// Initialiser au chargement
+document.addEventListener('DOMContentLoaded', () => {
+    loadGallery();
+    loadDiplomas();
+});
